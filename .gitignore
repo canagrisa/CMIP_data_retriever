@@ -1,0 +1,10 @@
+# Virtual environment
+venv/
+
+# pytest cache
+.pytest_cache/
+
+# Python cache files and directories
+__pycache__/
+*.pyc
+*.pyo
