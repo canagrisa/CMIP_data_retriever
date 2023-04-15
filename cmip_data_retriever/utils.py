@@ -75,6 +75,48 @@ region_polygons = {
     'med': [(-6, 30), (-5.31, 41), (13.66, 47.29), (39, 38.2), (36, 30)]
 }
 
+
+def standardize_coords(ds):
+    """
+    Standardize the coordinate names in the given dataset.
+
+    Parameters:
+    ds (xarray.Dataset): The dataset with possibly non-standard coordinate names.
+
+    Returns:
+    xarray.Dataset: The dataset with standardized coordinate names.
+    """
+
+    coords_map = {'lat': 'latitude', 'latitude': 'latitude',
+                  'lon': 'longitude', 'longitude': 'longitude'}
+
+    for coord in ds.coords:
+        if coord in coords_map:
+            ds = ds.rename({coord: coords_map[coord]})
+
+    if 'latitude' not in ds.coords or 'longitude' not in ds.coords:
+        raise ValueError("Latitude and longitude coordinates not found in the dataset")
+
+    return ds
+
+def needs_sorting(ds):
+    """
+    Check if a dataset's latitude and longitude coordinates need sorting.
+
+    Parameters:
+    ds (xarray.Dataset): The dataset to be checked.
+
+    Returns:
+    bool: True if the dataset needs sorting, False otherwise.
+    """
+
+    lat_needs_sorting = (ds['latitude'].ndim == 1 and
+                         not ds['latitude'].equals(ds['latitude'].sortby('latitude')))
+    lon_needs_sorting = (ds['longitude'].ndim == 1 and
+                         not ds['longitude'].equals(ds['longitude'].sortby('longitude')))
+
+    return lat_needs_sorting or lon_needs_sorting
+
 def crop_by_polygon(ds, polygon='med'):
     """
     Crop an xarray dataset by a specified polygon.
@@ -88,6 +130,7 @@ def crop_by_polygon(ds, polygon='med'):
     Returns:
     xarray.Dataset: The cropped dataset.
     """
+    ds = standardize_coords(ds)
 
     # 1. Convert the longitude coordinates to a -180 to 180 range
     ds['longitude'] = xr.where(
@@ -129,5 +172,9 @@ def crop_by_polygon(ds, polygon='med'):
 
     # Apply the mask to the dataset, removing points outside the polygon
     ds_crop = ds.where(mask, drop=True)
-
+    if needs_sorting(ds):
+        ds_crop = ds_crop.sortby(['latitude', 'longitude'])
+    else:
+        ds_crop = ds_crop
+        
     return ds_crop
