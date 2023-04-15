@@ -4,21 +4,17 @@
 
 ## Features
 
-- Specify variables, experiments, models, and other filtering criteria.
-- Search for climate data models based on the specified filters.
-- Automatically find all models and variants within a module that contain all the selected experiments and variables. This allows for a specific set of variables and scenarios to find all models and variants that can be equally compared to each other.
-- Filter models based on the presence of requested variables and experiments.
-- Create a pandas DataFrame with an overview of the filtered models, their variants, variables, experiments, and other attributes.
+- Search for climate data models based on variables, experiments, models, and other filtering criteria.
+- Automatically find all models and variants within a module that contain all the selected experiments and variables. 
+- Create a pandas DataFrame with an overview of the models, their variants, variables, experiments, and other attributes.
 - Save the DataFrame to an Excel file for easy data analysis.
-- Download the data files based on the specified filters and filtered models, variants, variables, and experiments.
-- Downloads the data in a nested and organized folder structure that eases data retrieval.
-- Allows skipping certain models or selecting specific models.
+- Download the data files in a nested and organized folder structure based on the specified filters and filtered models, variants, variables, and experiments.
 - Optional cropping of the data by a specified region using a polygon.
 
 ## Installation
 
 ```bash
-pip install CMIP_data_retriever
+pip install git+https://github.com/canagrisa/CMIP_data_retriever.git
 ```
 
 ## Usage
@@ -33,8 +29,8 @@ downloader = CMIPDownloader(variables=variables, experiments=experiments)
 # Save the DataFrame with model information to an Excel file
 downloader.save_dataframe(outfolder='output', filename='model_info.xlsx')
 
-# Download the data files
-downloader.download_data()
+# Download the data files and crop for the Mediterranean Sea
+downloader.download_data(crop_region='med')
 ```
 
 ## License
