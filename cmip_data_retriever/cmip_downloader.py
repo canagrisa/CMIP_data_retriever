@@ -286,7 +286,7 @@ class CMIPDownloader:
                                     else:
                                         utils.download(row.url, path)
                                         if crop_region is not None:
-                                            ds = xr.open_dataset(path).astype('float32')
+                                            ds = xr.open_dataset(path)
                                             ds_crop = utils.crop_by_polygon(ds, polygon=crop_region)
                                             ds_crop.to_netcdf(path_crop)
                                             os.remove(path)
