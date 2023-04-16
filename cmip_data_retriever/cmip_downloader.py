@@ -66,7 +66,7 @@ class CMIPDownloader:
         'variable': variables_str,
         'experiment_id': experiments_str,
         'frequency': self.frequency,
-        'grid_label': 'gn,gr',
+        'grid_label': 'gn',
         # 'index_node': 'esgf-node.llnl.gov'
         }
 
@@ -264,7 +264,7 @@ class CMIPDownloader:
                             hit = _result.file_context().search()
                             if experiment in ['ssp126', 'ssp585']:
                                 files = [{'filename': f.filename, 'url': f.download_url} for f in hit if int(f.filename.split('_')[-1][:4]) >= 2015 
-                                            and int(f.filename.split('_')[-1][-11:-7]) <= 2100]
+                                            and int(f.filename.split('_')[-1][-11:-7]) <= 2150]
                             else:
                                 files = [{'filename': f.filename, 'url': f.download_url} for f in hit]
 
