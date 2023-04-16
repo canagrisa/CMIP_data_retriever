@@ -72,7 +72,7 @@ def download(url, filename, max_retries=3, retry_wait=5):
 
 
 region_polygons = {
-    'med': [(-6, 30), (-5.31, 41), (13.66, 47.29), (39, 38.2), (36, 30)]
+    'med': [(-6, 30), (-5.31, 41), (13.66, 47.29), (26.80, 41.43), (27.08, 40.05), (39, 38.2), (36, 30)]
 }
 
 
@@ -87,8 +87,8 @@ def standardize_coords(ds):
     xarray.Dataset: The dataset with standardized coordinate names.
     """
 
-    coords_map = {'lat': 'latitude', 'latitude': 'latitude',
-                  'lon': 'longitude', 'longitude': 'longitude'}
+    coords_map = {'lat': 'latitude', 'latitude': 'latitude', 'nav_lat': 'latitude',
+                  'lon': 'longitude', 'longitude': 'longitude', 'nav_lon': 'longitude'}
 
     for coord in ds.coords:
         if coord in coords_map:
@@ -130,8 +130,14 @@ def crop_by_polygon(ds, polygon='med'):
     Returns:
     xarray.Dataset: The cropped dataset.
     """
-    ds = standardize_coords(ds)
 
+
+    if 'time_bnds' in ds.variables:
+        # Drop 'time_bnds' variable. This variable generates issues when cropping. 
+        ds = ds.drop_vars('time_bnds')
+
+    ds = standardize_coords(ds)
+    ds = ds.load()
     # 1. Convert the longitude coordinates to a -180 to 180 range
     ds['longitude'] = xr.where(
         ds['longitude'] > 180, ds['longitude'] - 360, ds['longitude'])
@@ -149,7 +155,7 @@ def crop_by_polygon(ds, polygon='med'):
     max_lat = max(p[1] for p in polygon)
 
     ds = ds.where((ds['longitude'] >= min_lon) & (ds['longitude'] <= max_lon) &
-                  (ds['latitude'] >= min_lat) & (ds['latitude'] <= max_lat), drop=True)
+                  (ds['latitude'] >= min_lat) & (ds['latitude'] <= max_lat), drop=True).compute()
 
     # Define a function to check if a point is inside the polygon
     def point_in_polygon(lon, lat):

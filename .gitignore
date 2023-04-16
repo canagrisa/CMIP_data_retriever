@@ -10,6 +10,8 @@ __pycache__/
 *.pyo
 
 #Testing file and data
+cmip_data_retriever/test.nc
 cmip_data_retriever/testing.ipynb
+cmip_data_retriever/testing_2.ipynb
 data/
 cmip_data_retriever/model_info.xlsx
