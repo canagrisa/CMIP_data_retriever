@@ -3,14 +3,14 @@ from pyesgf.search import SearchConnection
 import os
 import pandas as pd
 import copy
-from . import utils
-#import utils # comment before comitting
+#from . import utils
+import utils # comment before comitting
 import xarray as xr
 from datetime import datetime
 
 class CMIPDownloader:
 
-    def __init__(self, variables, experiments, model=None, frequency='mon'):
+    def __init__(self, variables, experiments, model=None, frequency='mon', grid = 'gn'):
 
         if isinstance(variables, str):
             variables = [variables]
@@ -20,6 +20,7 @@ class CMIPDownloader:
         self.experiments = experiments
         self.variables = variables
         self.frequency = frequency
+        self.grid = grid
         self.model = model
         self._results = None
         self._models_dict = None
@@ -66,7 +67,7 @@ class CMIPDownloader:
         'variable': variables_str,
         'experiment_id': experiments_str,
         'frequency': self.frequency,
-        'grid_label': 'gn',
+        'grid_label': self.grid,
         # 'index_node': 'esgf-node.llnl.gov'
         }
 
