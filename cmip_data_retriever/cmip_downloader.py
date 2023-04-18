@@ -3,8 +3,8 @@ from pyesgf.search import SearchConnection
 import os
 import pandas as pd
 import copy
-#from . import utils
-import utils # comment before comitting
+from . import utils
+#import utils # comment before comitting
 import xarray as xr
 from datetime import datetime
 
