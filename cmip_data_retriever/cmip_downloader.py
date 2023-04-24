@@ -228,7 +228,7 @@ class CMIPDownloader:
             
         self.df.to_excel(path, index=False)
 
-    def download_data(self, model_skip=[], model_select=[], crop_region=None):
+    def download_data(self, model_skip=[], model_select=[], crop_region=None, folder='..'):
         """
         Download data for specified models, variants, variables, and experiments.
 
@@ -271,7 +271,7 @@ class CMIPDownloader:
 
                             if len(files) > 0:
                                 
-                                ofo = f'../data/CMIP6/{model}/{variant}/{variable}/{experiment}/'
+                                ofo = f'{folder}/CMIP6/{model}/{variant}/{variable}/{experiment}/'
                                 
                                 # Create the output directory if it does not exist
                                 if not os.path.exists(ofo):
