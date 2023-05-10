@@ -13,5 +13,5 @@ __pycache__/
 cmip_data_retriever/test.nc
 cmip_data_retriever/testing.ipynb
 cmip_data_retriever/testing_2.ipynb
-data/
+data/CMIP6
 cmip_data_retriever/model_info.xlsx
