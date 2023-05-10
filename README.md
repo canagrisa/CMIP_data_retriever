@@ -68,7 +68,7 @@ downloader.download_data(model_select=models[:2], destination_folder='path/to/fo
 
 
 Example of download results from the usage example below
-![rec](/home/prossello/CMIP_data_retriever/data/rec.gif)
+![fig_1](./data/rec.gif)
 
 
 ## License
