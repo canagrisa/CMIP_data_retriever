@@ -1,8 +1,7 @@
-
 dask
 h5netcdf
 netCDF4
 numpy
 pandas
 xarray
-
+esgf-pyclient
