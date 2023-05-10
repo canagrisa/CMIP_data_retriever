@@ -2,6 +2,8 @@
 
 'CMIP_data_retriever' is a Python package that simplifies the process of downloading climate data from the CMIP6 (Coupled Model Intercomparison Project Phase 6) project. It allows users to search for and download the relevant data files from the ESGF (Earth System Grid Federation) repository based on their specific needs and filtering criteria.
 
+[![DOI](https://zenodo.org/badge/627657760.svg)](https://zenodo.org/badge/latestdoi/627657760)
+
 ## Features
 
 - Search for climate data models based on variables, experiments, models, and other filtering criteria.
