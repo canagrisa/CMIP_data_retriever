@@ -3,8 +3,8 @@ from pyesgf.search import SearchConnection
 import os
 import pandas as pd
 import copy
-from . import utils
-#import utils  # comment before comitting
+#from . import utils
+import utils  # comment before comitting
 import xarray as xr
 from datetime import datetime
 
@@ -293,7 +293,7 @@ class CMIPDownloader:
         self.df.to_excel(path, index=False)
 
     def download_data(
-        self, model_skip=[], model_select=[], crop_region=None, folder=".."
+        self, model_skip=[], model_select=[], crop_region=None, folder="..", max_variants=5
     ):
         """
         Download data for specified models, variants, variables, and experiments.
@@ -323,7 +323,7 @@ class CMIPDownloader:
             models = [model for model in models if model in model_select]
 
         for model in models:
-            for variant in list(self.models_dict_filtered[model].keys())[:5]:
+            for variant in list(self.models_dict_filtered[model].keys())[:max_variants]:
                 for variable in self.models_dict_filtered[model][variant]:
                     for experiment in self.models_dict_filtered[model][variant][
                         variable
