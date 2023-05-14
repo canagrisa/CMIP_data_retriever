@@ -6,7 +6,7 @@ The 'CMIP_data_retriever' is an easy-to-use Python package designed to streamlin
 
 This package's primary function is to automatically identify and download all relevant models and variants that meet a common set of criteria. For instance, by inputting a selection of experiments (e.g., 'SSP1-2.6', 'SSP5-8.5'), variables (e.g., 'tos' and 'tas'), grid type (e.g., native grid), and frequency (e.g., monthly), users can easily search for all models and variants containing data that match all of these specifications and readily download them in a structured nested folder structure. This functionality aims to simplify the process of working with a robust ensemble of models that share specifications.
 
-Information about the model varialbes can be found in https://pcmdi.llnl.gov/mips/cmip3/variableList.html.
+Information about the model varialbes can be found at https://pcmdi.llnl.gov/mips/cmip3/variableList.html.
 
 ## Features
 
