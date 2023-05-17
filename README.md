@@ -67,7 +67,7 @@ downloader.download_data(model_select=models[:2], destination_folder='path/to/fo
 ## Example
 
 
-Example of download results from the usage example below
+Example of download results from the usage example above
 ![fig_1](./data/rec.gif)
 
 
